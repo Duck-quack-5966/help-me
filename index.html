@@ -1,7 +1,60 @@
 <!DOCTYPE html>
-<html>
-  <body>
-    <h1>EAT </h1>
-    
-  </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Header Example</title>
+    <style>
+        /* 1. Remove default browser margins */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* 2. Style the top header container */
+        header {
+            background-color: #1abc9c;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* 3. Style content inside the header */
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Semantic HTML Header Component -->
+    <header>
+        <div class="logo">MyWebsite</div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <main style="padding: 20px;">
+        <h2>Welcome to the site</h2>
+        <p>Your main website content goes here...</p>
+    </main>
+
+</body>
 </html>
+
