@@ -24,36 +24,46 @@
             font-size: 24px; 
             font-weight: bold; 
         } 
-        
-        /* FIX: Added styling to make the clock visible and clean */
-        #live-clock {
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
-            background-color: rgba(0,0,0,0.1); /* Subtle dark background capsule */
-            padding: 5px 15px;
-            border-radius: 20px;
+
+        /* FIX: Added a right-side wrapper container to align nav and clock together */
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px; /* Controls the exact space between the Home link and the clock */
         }
 
+        /* FIX: Removed left margin since the parent gap property handles spacing now */
         nav a { 
             color: white; 
             text-decoration: none; 
-            margin-left: 15px; 
         } 
         nav a:hover { 
             text-decoration: underline; 
+        } 
+
+        #live-clock { 
+            color: white; 
+            font-size: 18px; 
+            font-weight: bold; 
+            background-color: rgba(0,0,0,0.1); 
+            padding: 5px 15px; 
+            border-radius: 20px; 
         } 
     </style> 
 </head> 
 <body> 
     <!-- Semantic HTML Header Component --> 
     <header> 
+        <!-- Left Item -->
         <div class="logo">MyWebsite</div> 
-        <!-- Reordered slightly so the clock sits nicely in the middle layout -->
-        <nav> 
-            <a href="#home">Home</a> 
-        </nav> 
-         <div id="live-clock"></div> 
+        
+        <!-- Right Items Wrapper Component --> 
+        <div class="header-right">
+            <nav> 
+                <a href="#home">Home</a> 
+            </nav> 
+            <div id="live-clock"></div> 
+        </div>
     </header> 
 
     <script> 
