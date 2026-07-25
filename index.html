@@ -3,39 +3,47 @@
 <head> 
     <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title>Top Header Example</title> 
+    <title>C.A.R.E</title> 
     <style> 
-        /* 1. Remove default browser margins */ 
+        /* 1. DEFAULT THEME (Night/Dark Mode) */ 
         body { 
             margin: 0; 
             font-family: Arial, sans-serif; 
+            background-color: #121212; 
+            color: #ffffff;
+            transition: background 0.3s, color 0.3s; /* Smooth color switching animation */
         } 
-        /* 2. Style the top header container */ 
+        
         header { 
-            background-color: #1abc9c; 
+            background-color: #1f1f1f; 
             color: white; 
             padding: 20px; 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
+            transition: background 0.3s;
         } 
-        /* 3. Style content inside the header */ 
+
         .logo { 
             font-size: 24px; 
             font-weight: bold; 
         } 
 
-        /* FIX: Added a right-side wrapper container to align nav and clock together */
         .header-right {
             display: flex;
             align-items: center;
-            gap: 5px; /* Controls the exact space between the Home link and the clock */
+            gap: 15px; 
         }
 
-        /* FIX: Removed left margin since the parent gap property handles spacing now */
+        nav {
+            display: inline;
+        }
+
         nav a { 
             color: white; 
             text-decoration: none; 
+            font-size: 16px;
+            transition: color 0.3s;
         } 
         nav a:hover { 
             text-decoration: underline; 
@@ -45,29 +53,64 @@
             color: white; 
             font-size: 18px; 
             font-weight: bold; 
-            background-color: rgba(0,0,0,0.1); 
+            background-color: rgba(255,255,255,0.1); 
             padding: 5px 15px; 
             border-radius: 20px; 
         } 
+
+        /* Theme Toggle Button Style */
+        #theme-toggle {
+            background-color: rgba(255,255,255,0.15);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        #theme-toggle:hover {
+            background-color: rgba(255,255,255,0.3);
+        }
+
+        /* 2. ALTERNATE THEME (Light Mode Styles) */
+        body.light-mode {
+            background-color: #f5f7fa;
+            color: #333333;
+        }
+        
+        body.light-mode header {
+            background-color: #1abc9c; /* Keeps header vibrant or you can change it to white */
+        }
+
+        body.light-mode #theme-toggle {
+            background-color: rgba(0,0,0,0.1);
+            color: white;
+        }
     </style> 
 </head> 
 <body> 
     <!-- Semantic HTML Header Component --> 
     <header> 
-        <!-- Left Item -->
-        <div class="logo">C.A.R.E</div> 
+        <div class="logo">MyWebsite</div> 
         
-        <!-- Right Items Wrapper Component --> 
         <div class="header-right">
             <nav> 
                 <a href="#home">Home</a> 
-                <a href="#home">Create</a>
             </nav> 
             <div id="live-clock"></div> 
+            <!-- Added Toggle Button -->
+            <button id="theme-toggle">☀️ Light</button>
         </div>
     </header> 
 
+    <main style="padding: 20px;"> 
+        <h2>Welcome to the site</h2> 
+        <p>Click the button in the header to switch between Night Mode and Light Mode.</p> 
+    </main> 
+
     <script> 
+        // --- 1. Clock Logic ---
         function updateClock() { 
             const now = new Date(); 
             const hours = String(now.getHours()).padStart(2, '0'); 
@@ -77,12 +120,22 @@
         } 
         updateClock(); 
         setInterval(updateClock, 1000); 
-    </script> 
 
-    <main style="padding: 20px;"> 
-        <h2>Welcome to the site</h2> 
-        <p>Your main website content goes here...</p> 
-    </main> 
+        // --- 2. Theme Toggle Logic ---
+        const toggleBtn = document.getElementById('theme-toggle');
+        
+        toggleBtn.addEventListener('click', () => {
+            // Toggles the .light-mode class on the <body> tag
+            document.body.classList.toggle('light-mode');
+            
+            // Updates button text based on current theme state
+            if (document.body.classList.contains('light-mode')) {
+                toggleBtn.textContent = '🌙 Night';
+            } else {
+                toggleBtn.textContent = '☀️ Light';
+            }
+        });
+    </script> 
 </body> 
 </html>
 
