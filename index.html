@@ -11,7 +11,7 @@
             font-family: Arial, sans-serif; 
             background-color: #121212; 
             color: #ffffff; 
-            transition: background 0.3s, color 0.3s; /* Smooth color switching animation */ 
+            transition: background 0.3s, color 0.3s;  
         } 
         header { 
             background-color: #262621; 
@@ -32,11 +32,11 @@
             gap: 15px; 
         } 
 
-        /* FIX: Made the nav a flex container to precisely separate internal links */
+      
         nav { 
             display: flex;
             align-items: center;
-            gap: 15px; /* Adjust this number higher to push Home and Create further apart */
+            gap: 15px; 
         } 
         nav a { 
             color: white; 
@@ -75,7 +75,7 @@
             color: #333333; 
         } 
         body.light-mode header { 
-            background-color: #537FCB; /* Keeps header vibrant or you can change it to white */ 
+            background-color: #537FCB;  
         } 
         body.light-mode #theme-toggle { 
             background-color: rgba(0,0,0,0.1); 
@@ -84,22 +84,22 @@
         .add-square {
             width: 120px;
             height: 120px;
-            background-color: #537FCB; /* Matches teal design color theme */
+            background-color: #537FCB; 
             color: white;
             font-size: 50px;
             font-weight: normal;
             border: none;
-            border-radius: 8px; /* Slightly rounded edges, set to 0px for a sharp square */
+            border-radius: 8px; 
             cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
             transition: transform 0.2s, background-color 0.3s;
-            margin-top: 10px; /* Pushes it down slightly away from the header boundary */
+            margin-top: 10px; 
         }
         .add-square:hover {
-            transform: scale(1.05); /* Slight pop effect on hover */
-            background-color: #16a085; /* Darker teal highlight */
+            transform: scale(1.05); 
+            background-color: #3867B8; 
         }
 
         /* 2. ALTERNATE THEME (Light Mode Styles) */ 
@@ -114,9 +114,9 @@
             background-color: rgba(0,0,0,0.1); 
             color: white; 
         }
-        /* Style shift for the square button context in light mode */
+        
         body.light-mode .add-square {
-            background-color: #2c3e50; /* Dark slate button contrast for light mode */
+            background-color: #2c3e50;
         }
         body.light-mode .add-square:hover {
             background-color: #34495e;
