@@ -10,10 +10,9 @@
             margin: 0; 
             font-family: Arial, sans-serif; 
             background-color: #121212; 
-            color: #ffffff;
-            transition: background 0.3s, color 0.3s; /* Smooth color switching animation */
+            color: #ffffff; 
+            transition: background 0.3s, color 0.3s; /* Smooth color switching animation */ 
         } 
-        
         header { 
             background-color: #1f1f1f; 
             color: white; 
@@ -21,34 +20,33 @@
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
-            transition: background 0.3s;
+            transition: background 0.3s; 
         } 
-
         .logo { 
             font-size: 24px; 
             font-weight: bold; 
         } 
+        .header-right { 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+        } 
 
-        .header-right {
+        /* FIX: Made the nav a flex container to precisely separate internal links */
+        nav { 
             display: flex;
             align-items: center;
-            gap: 15px; 
-        }
-
-        nav {
-            display: inline;
-        }
-
+            gap: 15px; /* Adjust this number higher to push Home and Create further apart */
+        } 
         nav a { 
             color: white; 
             text-decoration: none; 
-            font-size: 16px;
-            transition: color 0.3s;
+            font-size: 16px; 
+            transition: color 0.3s; 
         } 
         nav a:hover { 
             text-decoration: underline; 
         } 
-
         #live-clock { 
             color: white; 
             font-size: 18px; 
@@ -57,60 +55,53 @@
             padding: 5px 15px; 
             border-radius: 20px; 
         } 
-
-        /* Theme Toggle Button Style */
-        #theme-toggle {
-            background-color: rgba(255,255,255,0.15);
-            color: white;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 14px;
-        }
-        #theme-toggle:hover {
-            background-color: rgba(255,255,255,0.3);
-        }
-
-        /* 2. ALTERNATE THEME (Light Mode Styles) */
-        body.light-mode {
-            background-color: #f5f7fa;
-            color: #333333;
-        }
-        
-        body.light-mode header {
-            background-color: #1abc9c; /* Keeps header vibrant or you can change it to white */
-        }
-
-        body.light-mode #theme-toggle {
-            background-color: rgba(0,0,0,0.1);
-            color: white;
-        }
+        /* Theme Toggle Button Style */ 
+        #theme-toggle { 
+            background-color: rgba(255,255,255,0.15); 
+            color: white; 
+            border: none; 
+            padding: 6px 12px; 
+            border-radius: 20px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            font-size: 14px; 
+        } 
+        #theme-toggle:hover { 
+            background-color: rgba(255,255,255,0.3); 
+        } 
+        /* 2. ALTERNATE THEME (Light Mode Styles) */ 
+        body.light-mode { 
+            background-color: #f5f7fa; 
+            color: #333333; 
+        } 
+        body.light-mode header { 
+            background-color: #1abc9c; /* Keeps header vibrant or you can change it to white */ 
+        } 
+        body.light-mode #theme-toggle { 
+            background-color: rgba(0,0,0,0.1); 
+            color: white; 
+        } 
     </style> 
 </head> 
 <body> 
     <!-- Semantic HTML Header Component --> 
     <header> 
         <div class="logo">C.A.R.E</div> 
-        
-        <div class="header-right">
+        <div class="header-right"> 
             <nav> 
                 <a href="#home">Home</a> 
                 <a href="#home">Create</a> 
             </nav> 
             <div id="live-clock"></div> 
-            <!-- Added Toggle Button -->
-            <button id="theme-toggle">☀️ Light</button>
-        </div>
+            <!-- Added Toggle Button --> 
+            <button id="theme-toggle">☀️ Light</button> 
+        </div> 
     </header> 
-
     <main style="padding: 20px;"> 
         <h2>Welcome to the site</h2> 
     </main> 
-
     <script> 
-        // --- 1. Clock Logic ---
+        // --- 1. Clock Logic --- 
         function updateClock() { 
             const now = new Date(); 
             const hours = String(now.getHours()).padStart(2, '0'); 
@@ -121,20 +112,18 @@
         updateClock(); 
         setInterval(updateClock, 1000); 
 
-        // --- 2. Theme Toggle Logic ---
-        const toggleBtn = document.getElementById('theme-toggle');
-        
-        toggleBtn.addEventListener('click', () => {
-            // Toggles the .light-mode class on the <body> tag
-            document.body.classList.toggle('light-mode');
-            
-            // Updates button text based on current theme state
-            if (document.body.classList.contains('light-mode')) {
-                toggleBtn.textContent = '🌙 Night';
-            } else {
-                toggleBtn.textContent = '☀️ Light';
-            }
-        });
+        // --- 2. Theme Toggle Logic --- 
+        const toggleBtn = document.getElementById('theme-toggle'); 
+        toggleBtn.addEventListener('click', () => { 
+            // Toggles the .light-mode class on the <body> tag 
+            document.body.classList.toggle('light-mode'); 
+            // Updates button text based on current theme state 
+            if (document.body.classList.contains('light-mode')) { 
+                toggleBtn.textContent = '🌙 Night'; 
+            } else { 
+                toggleBtn.textContent = '☀️ Light'; 
+            } 
+        }); 
     </script> 
 </body> 
 </html>
