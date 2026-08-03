@@ -20,11 +20,11 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 40px; /* Thickness of the hover detection area */
+            height: 20px; /* Thinner trigger zone so content starts higher up */
             z-index: 999;
         }
 
-        /* Updated header to support absolute hide/reveal transitions */
+        /* Updated header layout to dynamically adjust document height */
         header {
             background-color: #262621;
             color: white;
@@ -32,22 +32,22 @@
             display: grid;
             grid-template-columns: 1fr auto 1fr;
             align-items: center;
-            transition: background 0.3s, transform 0.3s ease-in-out;
             
-            /* Hide mechanics */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            box-sizing: border-box;
-            transform: translateY(-100%); /* Moves header fully off-screen */
-            z-index: 1000;
+            /* Changed to relative height transitions instead of off-screen fixed placements */
+            max-height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: background 0.3s, max-height 0.3s ease-in-out, padding 0.3s ease-in-out, opacity 0.2s ease-in-out;
         }
 
-        /* Reveals the header when triggering zone OR the header itself is hovered */
+        /* Expands header and dynamic padding when triggering zone OR the header itself is hovered */
         .header-trigger:hover + header,
         header:hover {
-            transform: translateY(0); /* Slides header back down into view */
+            max-height: 100px; /* Safe upper limit for expansion */
+            padding: 26px;
+            opacity: 1;
         }
 
         .logo {
@@ -126,10 +126,9 @@
             color: white;
         }
 
-        /* Main content needs top margin so elements aren't blocked when header appears */
+        /* Main content transitions automatically based on header presence */
         main {
             padding: 20px;
-            margin-top: 40px; 
         }
 
         .add-square {
@@ -216,4 +215,5 @@
     </script>
 </body>
 </html>
+
 
