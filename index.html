@@ -1,170 +1,187 @@
-<!DOCTYPE html> 
-<html lang="en"> 
-<head> 
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title>C.A.R.E</title> 
-    <style> 
-        /* 1. DEFAULT THEME (Night/Dark Mode) */ 
-        body { 
-            margin: 0; 
-            font-family: Arial, sans-serif; 
-            background-color: #121212; 
-            color: #ffffff; 
-            transition: background 0.3s, color 0.3s;  
-        } 
-        header { 
-            background-color: #262621; 
-            color: white; 
-            padding: 26px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            transition: background 0.3s; 
-        } 
-        .logo { 
-            font-size: 24px; 
-            font-weight: bold; 
-        } 
-        .header-right { 
-            display: flex; 
-            align-items: center; 
-            gap: 15px; 
-        } 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C.A.R.E</title>
+    <style>
+        /* 1. DEFAULT THEME (Night/Dark Mode) */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            transition: background 0.3s, color 0.3s;
+        }
+        
+        /* Updated header layout to grid for absolute centering */
+        header {
+            background-color: #262621;
+            color: white;
+            padding: 26px;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            transition: background 0.3s;
+        }
 
-      
-        nav { 
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            grid-column: 2; /* Forces logo into the center grid cell */
+            text-align: center;
+        }
+
+        /* Positions navigation links cleanly on the far left */
+        nav {
             display: flex;
             align-items: center;
-            gap: 15px; 
-        } 
-        nav a { 
-            color: white; 
-            text-decoration: none; 
-            font-size: 16px; 
-            transition: color 0.3s; 
-        } 
-        nav a:hover { 
-            text-decoration: underline; 
-        } 
-        #live-clock { 
-            color: white; 
-            font-size: 18px; 
-            font-weight: bold; 
-            background-color: rgba(255,255,255,0.1); 
-            padding: 5px 15px; 
-            border-radius: 20px; 
-        } 
-        /* Theme Toggle Button Style */ 
-        #theme-toggle { 
-            background-color: rgba(255,255,255,0.15); 
-            color: white; 
-            border: none; 
-            padding: 6px 12px; 
-            border-radius: 20px; 
-            cursor: pointer; 
-            font-weight: bold; 
-            font-size: 14px; 
-        } 
-        #theme-toggle:hover { 
-            background-color: rgba(255,255,255,0.3); 
-        } 
-        /* 2. ALTERNATE THEME (Light Mode Styles) */ 
-        body.light-mode { 
-            background-color: #f5f7fa; 
-            color: #333333; 
-        } 
-        body.light-mode header { 
-            background-color: #537FCB;  
-        } 
-        body.light-mode #theme-toggle { 
-            background-color: rgba(0,0,0,0.1); 
-            color: white; 
-        } 
+            gap: 15px;
+            grid-column: 1;
+            grid-row: 1;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Positions clock and toggle cleanly on the far right */
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            grid-column: 3;
+            justify-content: flex-end;
+        }
+
+        #live-clock {
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: rgba(255,255,255,0.1);
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        /* Theme Toggle Button Style */
+        #theme-toggle {
+            background-color: rgba(255,255,255,0.15);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        #theme-toggle:hover {
+            background-color: rgba(255,255,255,0.3);
+        }
+
+        /* 2. ALTERNATE THEME (Light Mode Styles) */
+        body.light-mode {
+            background-color: #f5f7fa;
+            color: #333333;
+        }
+
+        body.light-mode header {
+            background-color: #537FCB;
+        }
+
+        body.light-mode #theme-toggle {
+            background-color: rgba(0,0,0,0.1);
+            color: white;
+        }
+
         .add-square {
             width: 120px;
             height: 120px;
-            background-color: #537FCB; 
+            background-color: #537FCB;
             color: white;
             font-size: 50px;
             font-weight: normal;
             border: none;
-            border-radius: 8px; 
+            border-radius: 8px;
             cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
             transition: transform 0.2s, background-color 0.3s;
-            margin-top: 10px; 
-        }
-        .add-square:hover {
-            transform: scale(1.05); 
-            background-color: #3867B8; 
+            margin-top: 10px;
         }
 
-        /* 2. ALTERNATE THEME (Light Mode Styles) */ 
-        body.light-mode { 
-            background-color: #f5f7fa; 
-            color: #333333; 
-        } 
-        body.light-mode header { 
-            background-color: #537FCB; 
-        } 
-        body.light-mode #theme-toggle { 
-            background-color: rgba(0,0,0,0.1); 
-            color: white; 
+        .add-square:hover {
+            transform: scale(1.05);
+            background-color: #3867B8;
         }
-        
+
         body.light-mode .add-square {
             background-color: #2c3e50;
         }
+
         body.light-mode .add-square:hover {
             background-color: #34495e;
         }
-    </style> 
-</head> 
-<body> 
-    <!-- Semantic HTML Header Component --> 
-    <header> 
-        <div class="logo">C.A.R.E</div> 
-        <div class="header-right"> 
-            <nav> 
-                <a href="#home">Home</a> 
-                <a href="#home">Create</a> 
-            </nav> 
-            <div id="live-clock"></div> 
-            <!-- Added Toggle Button --> 
-            <button id="theme-toggle">☀️ Light</button> 
-        </div> 
-    </header> 
-    <main style="padding: 20px;"> 
-         <!-- Square Button added below -->
-        <button class="add-square"> +</button> 
-    </main> 
-    <script> 
-        // --- 1. Clock Logic --- 
-        function updateClock() { 
-            const now = new Date(); 
-            const hours = String(now.getHours()).padStart(2, '0'); 
-            const minutes = String(now.getMinutes()).padStart(2, '0'); 
-            const seconds = String(now.getSeconds()).padStart(2, '0'); 
-            document.getElementById('live-clock').textContent = `${hours}:${minutes}:${seconds}`; 
-        } 
-        updateClock(); 
-        setInterval(updateClock, 1000); 
+    </style>
+</head>
+<body>
 
-        // --- 2. Theme Toggle Logic --- 
-        const toggleBtn = document.getElementById('theme-toggle'); 
-        toggleBtn.addEventListener('click', () => { 
-            // Toggles the .light-mode class on the <body> tag 
-            document.body.classList.toggle('light-mode'); 
-            // Updates button text based on current theme state 
-            if (document.body.classList.contains('light-mode')) { 
-                toggleBtn.textContent = '🌙 Night'; 
-            } else { 
-                toggleBtn.textContent = '☀️ Light'; 
-            } 
-        }); 
+    <!-- Semantic HTML Header Component -->
+    <header>
+        <!-- Left Side: Navigation Links -->
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#home">Create</a>
+        </nav>
+
+        <!-- Center: Brand Logo -->
+        <div class="logo">C.A.R.E</div>
+
+        <!-- Right Side: Utility Items -->
+        <div class="header-right">
+            <div id="live-clock"></div>
+            <button id="theme-toggle">☀️ Light</button>
+        </div>
+    </header>
+
+    <main style="padding: 20px;">
+        <!-- Square Button added below -->
+        <button class="add-square">+</button>
+    </main>
+
+    <script>
+        // --- 1. Clock Logic ---
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('live-clock').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        // --- 2. Theme Toggle Logic ---
+        const toggleBtn = document.getElementById('theme-toggle');
+        toggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            if (document.body.classList.contains('light-mode')) {
+                toggleBtn.textContent = '🌙 Night';
+            } else {
+                toggleBtn.textContent = '☀️ Light';
+            }
+        });
+    </script>
+</body>
+</html>
     </script> 
 </body> 
 </html>
