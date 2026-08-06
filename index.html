@@ -21,6 +21,7 @@
 <body>
 
 <nav>
+  <!-- Mobile Sidebar -->
   <ul class="sidebar">
     <li onclick="hideSidebar()">
       <a href="#">
@@ -36,34 +37,26 @@
     </li>
   </ul>
 
-  <li class="hideOnMobile"><a href="index.html">Home</a></li>
-  <li class="hideOnMobile"><a href="create.html">Create</a></li>
-
-  <li class="logo hideOnMobile">
-    <a href="index.html">C.A.R.E</a>
-  </li>
-
-  <li class="clock hideOnMobile">
-    <span id="live-clock"></span>
-  </li>
-
+  <!-- Desktop Navigation -->
   <ul class="main-menu">
+    <!-- Left -->
     <li class="hideOnMobile"><a href="index.html">Home</a></li>
     <li class="hideOnMobile"><a href="create.html">Create</a></li>
-    <li class="hideOnMobile title">
-    <a href="index.html">C.A.R.E</a>
+
+    <!-- Center -->
+    <li class="logo hideOnMobile">
+      <a href="index.html">C.A.R.E</a>
     </li>
-    <!-- Clock -->
+
+    <!-- Right -->
     <li class="clock hideOnMobile">
       <span id="live-clock"></span>
     </li>
 
-    <!-- Theme Toggle -->
     <li class="theme-toggle" onclick="toggleTheme()">
       <span id="theme-icon">☀️</span>
     </li>
 
-    <!-- Mobile Menu -->
     <li class="menu-button" onclick="showSidebar()">
       <a href="#">
         <svg viewBox="0 0 24 24">
