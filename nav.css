@@ -197,6 +197,9 @@ nav .main-menu .logo span {
     display: none;
   }
 
+  .title {
+    padding: 20px 100px;
+      }
   .menu-button {
     display: block;
   }
