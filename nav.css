@@ -405,3 +405,17 @@ nav .main-menu .logo span {
     gap: 16px;
   }
 }
+
+/* CARE title in the navigation bar */
+.title {
+    margin-right: auto;      /* Pushes everything after it to the right */
+}
+
+.title a {
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 4px;
+    text-decoration: none;
+    color: inherit;
+    font-family: "Modak", cursive; /* Remove if you don't want the Modak font */
+}
