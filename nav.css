@@ -84,10 +84,18 @@ nav a:hover {
 }
 
 .logo {
-  margin-right: auto;
-  display: flex;
-  align-items: center;
-  gap: 12px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+}
+
+.logo a {
+    font-family: "Modak", cursive;
+    font-size: 40px;
+    letter-spacing: 4px;
+    text-decoration: none;
+    color: var(--text);
 }
 
 .logo img {
@@ -406,30 +414,3 @@ nav .main-menu .logo span {
   }
 }
 
-/* Make the navbar a positioning container */
-.main-menu {
-    position: relative;
-}
-
-/* Center the CARE title */
-.nav-title {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    list-style: none;
-}
-
-.nav-title a {
-    text-decoration: none;
-    color: inherit;
-    font-family: "Modak", cursive;
-    font-size: 2.5rem;
-    letter-spacing: 4px;
-    white-space: nowrap;
-}
-
-/* Keep it hidden on mobile if you're already using hideOnMobile */
-.hideOnMobile.nav-title {
-    display: flex;
-    align-items: center;
-}
