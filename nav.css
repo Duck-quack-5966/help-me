@@ -406,16 +406,30 @@ nav .main-menu .logo span {
   }
 }
 
-/* CARE title in the navigation bar */
-.title {
-    margin-right: auto;      /* Pushes everything after it to the right */
+/* Make the navbar a positioning container */
+.main-menu {
+    position: relative;
 }
 
-.title a {
-    font-size: 2rem;
-    font-weight: bold;
-    letter-spacing: 4px;
+/* Center the CARE title */
+.nav-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    list-style: none;
+}
+
+.nav-title a {
     text-decoration: none;
     color: inherit;
-    font-family: "Modak", cursive; /* Remove if you don't want the Modak font */
+    font-family: "Modak", cursive;
+    font-size: 2.5rem;
+    letter-spacing: 4px;
+    white-space: nowrap;
+}
+
+/* Keep it hidden on mobile if you're already using hideOnMobile */
+.hideOnMobile.nav-title {
+    display: flex;
+    align-items: center;
 }
