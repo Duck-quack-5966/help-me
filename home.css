@@ -210,6 +210,13 @@
   border: 2px dashed var(--vibrant-blue);
   background: rgba(99, 151, 255, 0.06);
   box-shadow: none;
+
+  /* Smaller card */
+  height: 200px;
+  max-width: 260px;
+  aspect-ratio: auto;
+  align-self: start;
+  justify-self: start;
 }
 
 .add-project-card:hover {
