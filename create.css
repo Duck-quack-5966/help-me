@@ -331,3 +331,98 @@
     text-align: center;
   }
 }
+
+/* -------------------- Validation -------------------- */
+
+.input-error {
+  outline: 2px solid var(--orange) !important;
+}
+
+.error-hint {
+  color: var(--orange);
+  font-size: 12px;
+  margin-top: 6px;
+  font-weight: 600;
+}
+
+/* -------------------- Footer (submit / back / delete) -------------------- */
+
+.create-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.create-footer-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.back-link-btn {
+  color: var(--text);
+  opacity: 0.75;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 15px;
+  transition: opacity 0.15s ease;
+}
+
+.back-link-btn:hover {
+  opacity: 1;
+}
+
+.create-submit-btn {
+  padding: 14px 28px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, var(--vibrant-blue), var(--purple));
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.create-submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+}
+
+.delete-project-btn {
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: 1px solid var(--orange);
+  background: transparent;
+  color: var(--orange);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.delete-project-btn:hover {
+  background: var(--orange);
+  color: #fff;
+}
+
+@media (max-width: 480px) {
+  .create-footer {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .create-footer-right {
+    flex-direction: column-reverse;
+  }
+
+  .create-submit-btn,
+  .delete-project-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
