@@ -84,33 +84,7 @@ nav a:hover {
   opacity: 0.8;
 }
 
-/* -------------------- Active navigation link -------------------- */
 
-nav .main-menu > li > a,
-.sidebar li > a {
-  position: relative;
-}
-
-nav .main-menu > li > a::after,
-.sidebar li > a::after {
-  content: "";
-  position: absolute;
-  left: 20px;
-  right: 20px;
-  bottom: -2px;
-  height: 3px;
-  border-radius: 3px;
-  background: var(--text);
-
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform 0.2s ease;
-}
-
-nav .main-menu > li > a.active::after,
-.sidebar li > a.active::after {
-  transform: scaleX(1);
-}
 
 .logo {
   position: absolute;
@@ -257,3 +231,20 @@ nav .main-menu .logo span {
 }
 
 /* Home-page dashboard styles now live in home.css */
+/* Active page indicator */
+
+nav .main-menu > li > a {
+  position: relative;
+}
+
+nav .main-menu > li > a.active::after {
+  content: "";
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: -8px;
+  height: 4px;
+  background: #ffffff;
+  border-radius: 4px;
+  display: block;
+}
