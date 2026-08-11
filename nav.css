@@ -62,9 +62,10 @@ nav ul.main-menu {
   width: 100%;
   list-style: none;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   align-items: center;
   padding: 10px 20px;
+  position: relative;
 }
 
 nav a {
@@ -84,7 +85,9 @@ nav a:hover {
 }
 
 .logo {
-  margin-right: auto;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
   gap: 12px;
