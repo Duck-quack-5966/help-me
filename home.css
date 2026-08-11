@@ -15,7 +15,7 @@
 
 .home-header {
   margin-bottom: 36px;
-  padding: 40px clamp(20px, 5vw, 56px);
+  padding: 48px clamp(20px, 5vw, 56px);
   border-radius: 24px;
   background: linear-gradient(135deg, var(--vibrant-blue), var(--purple) 55%, var(--pink));
   position: relative;
@@ -31,7 +31,7 @@
 }
 
 .home-title {
-  font-size: clamp(40px, 7vw, 64px);
+  font-size: clamp(46px, 8vw, 72px);
   color: #fff;
   line-height: 1;
   letter-spacing: 0.01em;
@@ -72,15 +72,20 @@
 
 /* -------------------- Project card -------------------- */
 
-.project-card {
-  position: relative;
-  border-radius: 20px;
-  overflow: hidden;
-  cursor: pointer;
+.add-project-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-decoration: none;
+  border: 2px dashed var(--vibrant-blue);
+  background: rgba(99, 151, 255, 0.06);
+  box-shadow: none;
+
+  /* Same size as project cards */
+  width: 100%;
   aspect-ratio: 4 / 5;
-  display: block;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
 
 .project-card:hover {
@@ -225,8 +230,8 @@
 }
 
 .add-icon {
-  width: 56px;
-  height: 56px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   border: 2px solid var(--vibrant-blue);
   color: var(--vibrant-blue);
