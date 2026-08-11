@@ -71,7 +71,7 @@
   align-items: stretch;
 }
 
-/* -------------------- Project card -------------------- */
+/* -------------------- Add-project card -------------------- */
 
 .add-project-card {
   display: flex;
@@ -79,16 +79,24 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
+
   text-decoration: none;
+
   border: 2px dashed var(--vibrant-blue);
   background: rgba(99, 151, 255, 0.06);
   box-shadow: none;
 
-  /* Same size as project cards */
-  width: 100%;
+  /* IMPORTANT: let the grid control the size */
+  width: auto;
+  height: auto;
+  max-width: none;
   aspect-ratio: 4 / 5;
 }
 
+.add-project-card:hover {
+  background: rgba(99, 151, 255, 0.14);
+  border-color: var(--purple);
+}
 .project-card {
   position: relative;
   border-radius: 20px;
@@ -211,32 +219,6 @@
   transform: translateY(0);
 }
 
-/* -------------------- Add-project card -------------------- */
-
-.add-project-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  text-decoration: none;
-  border: 2px dashed var(--vibrant-blue);
-  background: rgba(99, 151, 255, 0.06);
-  box-shadow: none;
-
-  /* Smaller card */
-  height: 200px;
-  max-width: 260px;
-  aspect-ratio: auto;
-  align-self: start;
-  justify-self: start;
-}
-
-.add-project-card:hover {
-  background: rgba(99, 151, 255, 0.14);
-  border-color: var(--purple);
-}
-
 .add-icon {
   width: 60px;
   height: 60px;
@@ -288,9 +270,11 @@
 
 @media (max-width: 480px) {
   #project-container {
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 16px;
-  }
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 300px));
+  gap: 24px;
+  align-items: start;
+}
 
   .home-header {
     padding: 28px 20px;
