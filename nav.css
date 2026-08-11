@@ -64,7 +64,7 @@ nav ul.main-menu {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding: 30px 50px;
+  padding: 30px 30px;
 }
 
 nav a {
