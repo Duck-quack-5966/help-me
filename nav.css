@@ -119,7 +119,7 @@ nav .main-menu .logo span {
   font-family: "Modak", system-ui;
   font-weight: 400;
   font-style: normal;
-  font-size: 36px;
+  font-size: 60px;
   color: var(--text);
 }
 
@@ -130,6 +130,11 @@ nav .main-menu .logo span {
   justify-content: center;
   padding: 0 15px;
   margin-left: 10px;
+}
+
+#theme-icon {
+  font-size: 28px; /* Adjust size here (e.g., 28px - 34px) */
+  line-height: 1;
 }
 
 .theme-toggle img {
