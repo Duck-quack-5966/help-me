@@ -15,12 +15,13 @@
 
 .home-header {
   margin-bottom: 36px;
-  padding: 48px clamp(20px, 5vw, 56px);
+  padding: 52px clamp(20px, 5vw, 56px);
   border-radius: 24px;
   background: linear-gradient(135deg, var(--vibrant-blue), var(--purple) 55%, var(--pink));
   position: relative;
   overflow: hidden;
 }
+
 
 .home-header::after {
   content: "";
@@ -31,7 +32,7 @@
 }
 
 .home-title {
-  font-size: clamp(46px, 8vw, 72px);
+  font-size: clamp(48px, 8vw, 72px);
   color: #fff;
   line-height: 1;
   letter-spacing: 0.01em;
