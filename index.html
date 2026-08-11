@@ -11,7 +11,7 @@
 
   <link rel="stylesheet" href="nav.css">
   <link rel="stylesheet" href="font.css">
-  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="home.css">
 
   <script defer src="nav.js"></script>
   <script defer src="storage.js"></script>
@@ -21,7 +21,6 @@
 <body>
 
 <nav>
-  <!-- Mobile Sidebar -->
   <ul class="sidebar">
     <li onclick="hideSidebar()">
       <a href="#">
@@ -37,26 +36,25 @@
     </li>
   </ul>
 
-  <!-- Desktop Navigation -->
   <ul class="main-menu">
-    <!-- Left -->
+    <li class="logo">
+      <span class="modak-regular">C.A.R.E.</span>
+    </li>
+
     <li class="hideOnMobile"><a href="index.html">Home</a></li>
     <li class="hideOnMobile"><a href="create.html">Create</a></li>
 
-    <!-- Center -->
-    <li class="logo hideOnMobile">
-      <a href="index.html">C.A.R.E</a>
-    </li>
-
-    <!-- Right -->
+    <!-- Clock -->
     <li class="clock hideOnMobile">
       <span id="live-clock"></span>
     </li>
 
-   <li class="theme-toggle" onclick="toggleTheme()">
-    <span id="theme-icon">☀️</span>
+    <!-- Theme Toggle -->
+    <li class="theme-toggle" onclick="toggleTheme()">
+      <h1 id="theme-icon">☀️</h1>
     </li>
 
+    <!-- Mobile Menu -->
     <li class="menu-button" onclick="showSidebar()">
       <a href="#">
         <svg viewBox="0 0 24 24">
@@ -76,19 +74,26 @@
 <main id="home-view" class="page-view active-view">
 
   <div class="home-header">
-    <h1>CARE Dashboard</h1>
-    <p>Ceramic Artifact Reserve and Enclosure — your monitored projects</p>
+    <h1 class="home-title modak-regular">CARE</h1>
+    <p class="home-subtitle">Ceramic Artifact Reserve and Enclosure</p>
+    <p class="home-tagline">Monitor, protect and manage your artifact projects from one place.</p>
   </div>
 
-  <p id="empty-state">No projects yet. Click the "+" button to create your first project.</p>
+  <h2 class="section-heading">Projects</h2>
+
+  <p id="empty-state">No projects yet. Click the "Create Project" card to add your first one.</p>
 
   <div id="project-container">
 
-    <!-- Project cards are inserted here automatically by js/home.js -->
+    <!-- Project cards are inserted here automatically by home.js -->
 
-    <!-- Create New Project Button (always stays last) -->
-    <a href="create.html" id="add-link">
-      <button class="add-square" id="add-btn" type="button" title="Create new project">+</button>
+    <!-- Create New Project Card (always stays last) -->
+    <a href="create.html" id="add-link" class="project-card add-project-card">
+      <div class="add-icon">+</div>
+      <div class="add-text">
+        <span class="add-title">Create Project</span>
+        <span class="add-subtitle">Add a new artifact</span>
+      </div>
     </a>
   </div>
 
