@@ -71,7 +71,7 @@ nav a {
   height: 100%;
   padding: 0 20px;
   text-decoration: none;
-  font-size: 52px;
+  font-size: 32px;
   font-weight: 500;
   display: flex;
   align-items: center;
@@ -92,7 +92,7 @@ nav a:hover {
 
 .logo a {
     font-family: "Modak", cursive;
-    font-size: 40px;
+    font-size: 50px;
     letter-spacing: 4px;
     text-decoration: none;
     color: var(--text);
