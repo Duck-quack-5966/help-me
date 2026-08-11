@@ -37,7 +37,7 @@ body {
   color: var(--text);
   font-family: "Inter", sans-serif;
   transition: background-color 0.4s ease, color 0.4s ease;
-  padding-top: 96px;
+  padding-top: 125px;
 }
 
 nav {
