@@ -37,7 +37,7 @@ body {
   color: var(--text);
   font-family: "Inter", sans-serif;
   transition: background-color 0.4s ease, color 0.4s ease;
-  padding-top: 76px;
+  padding-top: 96px;
 }
 
 nav {
@@ -64,14 +64,14 @@ nav ul.main-menu {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding: 10px 50px;
+  padding: 18px 50px;
 }
 
 nav a {
   height: 100%;
   padding: 0 20px;
   text-decoration: none;
-  font-size: 22px;
+  font-size: 52px;
   font-weight: 500;
   display: flex;
   align-items: center;
