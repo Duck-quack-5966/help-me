@@ -77,16 +77,19 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
   gap: 12px;
-
-  width: 100%;
-  height: 100%;
-
   text-decoration: none;
+
   border: 2px dashed var(--vibrant-blue);
   background: rgba(99, 151, 255, 0.06);
   box-shadow: none;
+
+  /* Keep the card's normal project-card size */
+  width: 100%;
+  aspect-ratio: 4 / 5;
 }
+
 
 
 .add-project-card:hover {
@@ -216,16 +219,39 @@
 }
 
 .add-icon {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  border: 2px solid var(--vibrant-blue);
-  color: var(--vibrant-blue);
-  font-size: 30px;
+  width: 64px;
+  height: 64px;
+
+  /* This keeps the + perfectly centered */
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.22s ease, background 0.22s ease;
+
+  margin: 0;
+  padding: 0;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+  border: 2px solid var(--vibrant-blue);
+
+  background: transparent;
+  color: var(--vibrant-blue);
+
+  font-size: 34px;
+  font-weight: 400;
+  line-height: 1;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.add-icon:hover {
+  background: var(--vibrant-blue);
+  color: #fff;
+  transform: scale(1.08);
 }
 
 .add-project-card:hover .add-icon {
