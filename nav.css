@@ -80,6 +80,30 @@ nav a {
   transition: opacity 0.2s ease;
 }
 
+nav a {
+  position: relative;
+}
+
+/* Smooth underline */
+nav .main-menu > li.hideOnMobile > a::after {
+  content: "";
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 2px;
+  height: 3px;
+  border-radius: 10px;
+  background: var(--text);
+
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+/* Show underline on the current page */
+nav .main-menu > li.hideOnMobile > a.active::after {
+  transform: scaleX(1);
+}
 nav a:hover {
   opacity: 0.8;
 }
