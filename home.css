@@ -184,7 +184,12 @@
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 4px;
-  word-break: break-word;
+
+  /* Limit long project names */
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .project-card-meta {
