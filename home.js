@@ -3,7 +3,6 @@
    ------------------------------------------------------------
    Renders the project dashboard (index.html) from CareStorage.
    ============================================================ */
-
 (function () {
   const container = document.getElementById("project-container");
   const emptyState = document.getElementById("empty-state");
