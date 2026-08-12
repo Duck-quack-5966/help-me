@@ -9,7 +9,7 @@
   const noProjectMessage = document.getElementById("no-project-message");
   const editorEl = document.getElementById("project-editor");
   const saveIndicator = document.getElementById("save-indicator");
-
+ 
   const coverInput = document.getElementById("cover-image-input");
   const coverPreviewImg = document.getElementById("cover-preview-img");
   const coverPreviewPlaceholder = document.getElementById("cover-preview-placeholder");
