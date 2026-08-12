@@ -65,11 +65,10 @@
 
 #project-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, 260px);
   gap: 24px;
-  align-items: stretch;
+  align-items: start;
 }
-
 /* -------------------- Project card -------------------- */
 
 /* -------------------- Add-project card -------------------- */
@@ -95,10 +94,8 @@
   border-radius: 20px;
   overflow: hidden;
   cursor: pointer;
-
   width: 260px;
   height: 260px;
-
   display: block;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
   transition: transform 0.22s ease, box-shadow 0.22s ease;
