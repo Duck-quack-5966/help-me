@@ -235,136 +235,118 @@
   }
 
   // ---------- Cameras ----------
-  function setupCameraCards() {
-    document.querySelectorAll(".camera-card").forEach((card) => {
-      const num = card.dataset.camera;
-      const typeSelect = card.querySelector(".camera-type-select");
-      const urlInput = card.querySelector(".camera-url-input");
-      const connectBtn = card.querySelector(".camera-connect-btn");
-      const video = card.querySelector(".camera-video");
-      const img = card.querySelector(".camera-stream-img");
-      const placeholder = card.querySelector(".camera-placeholder");
-      const statusWrap = card.querySelector(".camera-status");
-      const statusText = card.querySelector(".status-text");
+function setupCameraCards() {
+  document.querySelectorAll(".camera-card").forEach((card) => {
+    const num = card.dataset.camera;
 
-      typeSelect.addEventListener("change", () => {
-        urlInput.style.display = typeSelect.value === "ip" ? "block" : "none";
-        resetCameraView(num, { video, img, placeholder, statusWrap, statusText });
-        project.cameras[num].type = typeSelect.value;
-        scheduleAutosave();
+    const typeSelect = card.querySelector(".camera-type-select");
+    const urlInput = card.querySelector(".camera-url-input");
+    const connectBtn = card.querySelector(".camera-connect-btn");
+
+    const video = card.querySelector(".camera-video");
+    const img = card.querySelector(".camera-stream-img");
+    const placeholder = card.querySelector(".camera-placeholder");
+
+    const statusWrap = card.querySelector(".camera-status");
+    const statusText = card.querySelector(".status-text");
+
+    // Make sure this camera has a saved state
+    project.cameras = project.cameras || {};
+
+    project.cameras[num] = project.cameras[num] || {
+      type: "webcam",
+      url: "",
+      connected: false
+    };
+
+    const savedCamera = project.cameras[num];
+
+    // Restore saved camera settings
+    typeSelect.value = savedCamera.type || "webcam";
+    urlInput.value = savedCamera.url || "";
+
+    urlInput.style.display =
+      typeSelect.value === "ip" ? "block" : "none";
+
+
+    // ---------------- CAMERA TYPE ----------------
+
+    typeSelect.addEventListener("change", () => {
+      urlInput.style.display =
+        typeSelect.value === "ip" ? "block" : "none";
+
+      project.cameras[num].type = typeSelect.value;
+
+      // Changing camera type means the old connection is no longer active
+      project.cameras[num].connected = false;
+
+      resetCameraView(num, {
+        video,
+        img,
+        placeholder,
+        statusWrap,
+        statusText
       });
 
-      urlInput.addEventListener("input", () => {
-        project.cameras[num].url = urlInput.value;
-        scheduleAutosave();
-      });
-
-      connectBtn.addEventListener("click", () => {
-        if (typeSelect.value === "webcam") {
-          connectWebcam(num, { video, img, placeholder, statusWrap, statusText, connectBtn });
-        } else {
-          connectIpCamera(num, urlInput.value.trim(), { video, img, placeholder, statusWrap, statusText, connectBtn });
-        }
-      });
+      scheduleAutosave();
     });
-  }
 
-  function resetCameraView(num, refs) {
-    if (activeStreams[num]) {
-      activeStreams[num].getTracks().forEach((t) => t.stop());
-      activeStreams[num] = null;
-    }
-    refs.video.style.display = "none";
-    refs.video.srcObject = null;
-    refs.img.style.display = "none";
-    refs.img.removeAttribute("src");
-    refs.placeholder.style.display = "block";
-    refs.placeholder.textContent = "No feed";
-    refs.statusWrap.classList.remove("is-connected", "is-error");
-    refs.statusText.textContent = "Not connected";
-    project.cameras[num].connected = false;
-  }
 
-  async function connectWebcam(num, refs) {
-    refs.statusText.textContent = "Connecting…";
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-      activeStreams[num] = stream;
-      refs.video.srcObject = stream;
-      refs.video.style.display = "block";
-      refs.img.style.display = "none";
-      refs.placeholder.style.display = "none";
-      refs.statusWrap.classList.add("is-connected");
-      refs.statusWrap.classList.remove("is-error");
-      refs.statusText.textContent = "Connected (webcam)";
-      refs.connectBtn.classList.add("connected");
-      refs.connectBtn.textContent = "Reconnect";
-      project.cameras[num].connected = true;
+    // ---------------- CAMERA URL ----------------
+
+    urlInput.addEventListener("input", () => {
+      project.cameras[num].url = urlInput.value;
+
+      // Don't claim it's connected if the URL has changed
+      project.cameras[num].connected = false;
+
       scheduleAutosave();
-    } catch (err) {
-      refs.statusWrap.classList.add("is-error");
-      refs.statusWrap.classList.remove("is-connected");
-      let message = "Could not access camera.";
-      if (err && err.name === "NotAllowedError") {
-        message = "Camera permission denied.";
-      } else if (err && err.name === "NotFoundError") {
-        message = "No camera device found.";
+    });
+
+
+    // ---------------- CONNECT BUTTON ----------------
+
+    connectBtn.addEventListener("click", () => {
+
+      if (typeSelect.value === "webcam") {
+
+        connectWebcam(num, {
+          video,
+          img,
+          placeholder,
+          statusWrap,
+          statusText,
+          connectBtn
+        });
+
+      } else {
+
+        connectIpCamera(
+          num,
+          urlInput.value.trim(),
+          {
+            video,
+            img,
+            placeholder,
+            statusWrap,
+            statusText,
+            connectBtn
+          }
+        );
+
       }
-      refs.statusText.textContent = message;
-      refs.placeholder.textContent = message;
-      project.cameras[num].connected = false;
-    }
-  }
+    });
 
-  function connectIpCamera(num, url, refs) {
-    if (!url) {
-      refs.statusText.textContent = "Enter a stream URL first.";
-      refs.statusWrap.classList.add("is-error");
-      return;
-    }
 
-    // Browsers cannot natively decode RTSP streams. Only MJPEG / plain
-    // image streams work in a normal <img> tag — anything else needs a
-    // server-side relay (e.g. transcoding to HLS or WebRTC).
-    if (url.trim().toLowerCase().startsWith("rtsp://")) {
-      refs.statusWrap.classList.add("is-error");
-      refs.statusWrap.classList.remove("is-connected");
-      refs.statusText.textContent = "RTSP can't play directly in a browser.";
-      refs.placeholder.style.display = "block";
-      refs.placeholder.textContent =
-        "RTSP streams aren't supported by browsers directly. Use a relay/transcoder (e.g. an RTSP-to-HLS or MJPEG bridge) and enter that URL instead.";
-      refs.video.style.display = "none";
-      refs.img.style.display = "none";
-      project.cameras[num].connected = false;
-      scheduleAutosave();
-      return;
-    }
+    // ---------------- RESTORE SAVED STATE ----------------
 
-    refs.statusText.textContent = "Connecting…";
-    refs.img.onload = () => {
-      refs.img.style.display = "block";
-      refs.video.style.display = "none";
-      refs.placeholder.style.display = "none";
-      refs.statusWrap.classList.add("is-connected");
-      refs.statusWrap.classList.remove("is-error");
-      refs.statusText.textContent = "Connected (stream)";
-      refs.connectBtn.classList.add("connected");
-      project.cameras[num].connected = true;
-      scheduleAutosave();
-    };
-    refs.img.onerror = () => {
-      refs.statusWrap.classList.add("is-error");
-      refs.statusWrap.classList.remove("is-connected");
-      refs.statusText.textContent = "Couldn't load stream from that URL.";
-      refs.placeholder.style.display = "block";
-      refs.placeholder.textContent = "Couldn't load stream — check the URL, CORS, or that it's a browser-playable format (e.g. MJPEG).";
-      refs.img.style.display = "none";
-      project.cameras[num].connected = false;
-      scheduleAutosave();
-    };
-    refs.img.src = url;
-    project.cameras[num].url = url;
-  }
+    if (savedCamera.connected) {
+      statusText.textContent = "Saved connection";
+      statusWrap.classList.add("is-connected");
+      connectBtn.textContent = "Reconnect";
+    }
+  });
+}
 
   // ---------- Climate (simulated, with live-data hook) ----------
   function setupClimate() {
