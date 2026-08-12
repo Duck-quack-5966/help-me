@@ -7,7 +7,7 @@
 (function () {
   const container = document.getElementById("project-container");
   const emptyState = document.getElementById("empty-state");
-  const addLink = document.getElementById("add-link");
+  const addLink = document.getElementById("add-link"); 
 
   // Rotating accent palette for gradient placeholders / accents,
   // pulled from the shared CSS variables so it matches both themes.
