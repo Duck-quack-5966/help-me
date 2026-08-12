@@ -1,9 +1,11 @@
+```css
 /* ============================================================
    home.css
    ------------------------------------------------------------
    Styles for the Home / Project Dashboard (index.html).
    Uses the shared CSS variables defined in nav.css.
    ============================================================ */
+
 #home-view {
   padding: 32px clamp(16px, 4vw, 48px) 60px;
   max-width: 1200px;
@@ -14,7 +16,7 @@
 
 .home-header {
   margin-bottom: 36px;
-  padding: 52px clamp(30px, 5vw, 56px);
+  padding: 52px clamp(20px, 5vw, 56px);
   border-radius: 24px;
   background: linear-gradient(135deg, var(--vibrant-blue), var(--purple) 55%, var(--pink));
   position: relative;
@@ -69,42 +71,22 @@
   align-items: stretch;
 }
 
-/* -------------------- Add-project card -------------------- */
+/* -------------------- Project card -------------------- */
 
-.add-project-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  gap: 12px;
-  text-decoration: none;
-
-  border: 2px dashed var(--vibrant-blue);
-  background: rgba(99, 151, 255, 0.06);
-  box-shadow: none;
-
-  /* Keep the card's normal project-card size */
-  width: 100%;
-  aspect-ratio: 4 / 5;
-}
-
-
-
-.add-project-card:hover {
-  background: rgba(99, 151, 255, 0.14);
-  border-color: var(--purple);
-}
 .project-card {
   position: relative;
   border-radius: 20px;
   overflow: hidden;
   cursor: pointer;
   aspect-ratio: 4 / 5;
-  width: 100%;
   display: block;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
   transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22);
 }
 
 .project-card-media {
@@ -217,63 +199,51 @@
   transform: translateY(0);
 }
 
-.add-icon {
-  width: 64px;
-  height: 64px;
+/* -------------------- Add-project card -------------------- */
 
-  /* This keeps the + perfectly centered */
+.add-project-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+  border: 2px dashed var(--vibrant-blue);
+  background: rgba(99, 151, 255, 0.06);
+  box-shadow: none;
+
+  /* Smaller card */
+  height: 200px;
+  max-width: 260px;
+  aspect-ratio: auto;
+  align-self: start;
+  justify-self: start;
+}
+
+.add-project-card:hover {
+  background: rgba(99, 151, 255, 0.14);
+  border-color: var(--purple);
+}
+
+.add-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid var(--vibrant-blue);
+  color: var(--vibrant-blue);
+  font-size: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  margin: 0;
-  padding: 0;
-
-  flex-shrink: 0;
-
-  border-radius: 50%;
-  border: 2px solid var(--vibrant-blue);
-
-  background: transparent;
-  color: var(--vibrant-blue);
-
-  font-size: 34px;
-  font-weight: 400;
-  line-height: 1;
-
-  transition:
-    background 0.2s ease,
-    color 0.2s ease,
-    transform 0.2s ease;
-}
-
-.add-icon:hover {
-  background: var(--vibrant-blue);
-  color: #fff;
-  transform: scale(1.08);
+  transition: transform 0.22s ease, background 0.22s ease;
 }
 
 .add-project-card:hover .add-icon {
-  width: 64px;
-  height: 64px;
-  flex: 0 0 64px;
-   padding: 0;
-
-  border-radius: 50%;
-  border: 2px solid var(--vibrant-blue);
-
-  color: var(--vibrant-blue);
-  font-size: 34px;
-  line-height: 1;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  margin: 0 auto;
-
-  transition: transform 0.22s ease, background 0.22s ease;
+  transform: rotate(90deg) scale(1.08);
+  background: var(--vibrant-blue);
+  color: #fff;
 }
+
 .add-text {
   display: flex;
   flex-direction: column;
@@ -304,15 +274,16 @@
   font-size: 16px;
 }
 
+/* -------------------- Mobile -------------------- */
+
 @media (max-width: 480px) {
   #project-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 300px));
-  gap: 24px;
-  align-items: start;
-}
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+  }
 
   .home-header {
     padding: 28px 20px;
   }
 }
+```
