@@ -1,3 +1,4 @@
+
 (function () {
   const navEl = document.querySelector("nav");
   if (!navEl) return;
