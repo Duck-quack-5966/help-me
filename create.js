@@ -40,11 +40,11 @@
   }
 
   // ---------- Init ----------
-  function init() {
+  async function init() {
     const id = getParam("id");
 
     if (id) {
-      const existing = CareStorage.getById(id);
+      const existing = await CareStorage.getById(id);
       if (!existing) {
         showNoProject();
         return;
@@ -128,12 +128,12 @@
       deleteBtn.type = "button";
       deleteBtn.className = "delete-project-btn";
       deleteBtn.textContent = "Delete Project";
-      deleteBtn.addEventListener("click", () => {
+      deleteBtn.addEventListener("click", async () => {
         const confirmed = window.confirm(
           `Are you sure you want to delete "${project.name || "this project"}"?`
         );
         if (!confirmed) return;
-        CareStorage.remove(project.id);
+        await CareStorage.remove(project.id);
         window.location.href = "index.html";
       });
       rightGroup.appendChild(deleteBtn);
@@ -151,7 +151,7 @@
     editorEl.appendChild(footer);
   }
 
-  function handleSubmit() {
+  async function handleSubmit() {
     const name = nameInput.value.trim();
     if (!name) {
       flashError(nameInput, "Please enter a project name before saving.");
@@ -160,7 +160,7 @@
 
     project.name = name;
 
-    const { record } = CareStorage.upsert(project);
+    const { record } = await CareStorage.upsert(project);
     project = record;
     window.location.href = "index.html";
   }
@@ -187,12 +187,12 @@
     saveIndicator.classList.add("saving");
 
     clearTimeout(autosaveTimer);
-    autosaveTimer = setTimeout(() => {
+    autosaveTimer = setTimeout(async () => {
       // Only persist a draft automatically once a project already has
       // a name — avoids littering storage with untitled drafts.
       if (nameInput.value.trim()) {
         project.name = nameInput.value.trim();
-        const { record, isNew } = CareStorage.upsert(project);
+        const { record, isNew } = await CareStorage.upsert(project);
         project = record;
         if (isNew) isEditing = true;
       }
@@ -416,5 +416,9 @@
     if (simulationTimer) clearInterval(simulationTimer);
   });
 
-  document.addEventListener("DOMContentLoaded", init);
+  document.addEventListener("DOMContentLoaded", () => {
+    auth.onAuthStateChanged((user) => {
+      if (user) init();
+    });
+  });
 })();
