@@ -4,7 +4,6 @@
    Include on every page that should require a logged-in user
    (index.html, create.html, project.html). Do NOT include on
    login.html — that page needs to be reachable while signed out.
-
    - Redirects to login.html if nobody is signed in.
    - Injects an account chip (email + Log out) into the nav once
      a user is confirmed, so you don't have to hand-edit the nav
