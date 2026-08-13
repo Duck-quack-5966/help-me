@@ -1,6 +1,6 @@
 /* ============================================================
    auth.js
-   ------------------------------------------------------------
+   -----------------------------------------------------------
    Thin wrapper around Firebase Auth. Used by login.html (sign up
    / log in forms) and auth-guard.js (checking session state on
    the protected pages).
