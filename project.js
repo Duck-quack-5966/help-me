@@ -4,7 +4,9 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  loadProject();
+  auth.onAuthStateChanged((user) => {
+    if (user) loadProject();
+  });
 
 });
 
@@ -27,7 +29,7 @@ function getProjectId() {
    LOAD PROJECT
 ===================================================== */
 
-function loadProject() {
+async function loadProject() {
 
   const projectId =
     getProjectId();
@@ -44,16 +46,8 @@ function loadProject() {
   }
 
 
-  const projects =
-    JSON.parse(
-      localStorage.getItem("care_projects") || "[]"
-    );
-
-
   const project =
-    projects.find(
-      p => String(p.id) === String(projectId)
-    );
+    await CareStorage.getById(projectId);
 
 
   if (!project) {
