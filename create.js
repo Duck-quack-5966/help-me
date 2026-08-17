@@ -3,7 +3,6 @@
    ------------------------------------------------------------
    Powers the Create / Edit Project page (create.html).
    ============================================================ */
-
 (function () {
   // ---------- Elements ----------
   const noProjectMessage = document.getElementById("no-project-message");
