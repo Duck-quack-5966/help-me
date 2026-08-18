@@ -2,6 +2,7 @@
    firebase-config.js
    ------------------------------------------------------------
    Central Firebase setup, shared by every page.
+
    1. Go to https://console.firebase.google.com → create a project
       (free "Spark" plan is enough for this).
    2. Project settings → General → "Your apps" → add a Web app →

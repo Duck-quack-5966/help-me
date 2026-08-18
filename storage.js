@@ -1,49 +1,18 @@
 /* ============================================================
    storage.js
    ------------------------------------------------------------
-   Shared localStorage layer for CARE projects.
-   Used by home.js (list/delete) and create.js (create/edit).
+   Shared data layer for CARE projects, backed by Firestore so
+   every signed-in user sees the same artefacts (this replaces
+   the old localStorage version, which was per-browser only).
+
+   Same method names as before (getAll, getById, upsert, remove,
+   blankProject), but they now return Promises — call sites use
+   await. Also adds subscribe(), used by home.js to keep the
+   dashboard live in real time as other users add/edit/delete.
    ============================================================ */
 
 const CareStorage = (function () {
-  const STORAGE_KEY = "care_projects";
-
-  function nowISO() {
-    return new Date().toISOString();
-  }
-
-  function generateId() {
-    if (window.crypto && typeof window.crypto.randomUUID === "function") {
-      return window.crypto.randomUUID();
-    }
-    return "care-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 9);
-  }
-
-  function getAll() {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return [];
-      const parsed = JSON.parse(raw);
-      return Array.isArray(parsed) ? parsed : [];
-    } catch (err) {
-      console.error("CareStorage: failed to read projects", err);
-      return [];
-    }
-  }
-
-  function saveAll(projects) {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
-      return true;
-    } catch (err) {
-      console.error("CareStorage: failed to save projects", err);
-      return false;
-    }
-  }
-
-  function getById(id) {
-    return getAll().find((p) => p.id === id) || null;
-  }
+  const COLLECTION = "artefacts";
 
   function blankProject() {
     return {
@@ -72,43 +41,60 @@ const CareStorage = (function () {
     };
   }
 
-  function upsert(projectData) {
-    const projects = getAll();
-    const id = projectData.id || generateId();
-    const timestamp = nowISO();
+  async function getAll() {
+    const snap = await db.collection(COLLECTION).get();
+    return snap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+  }
+
+  async function getById(id) {
+    if (!id) return null;
+    const doc = await db.collection(COLLECTION).doc(id).get();
+    return doc.exists ? { id: doc.id, ...doc.data() } : null;
+  }
+
+  async function upsert(projectData) {
+    const timestamp = new Date().toISOString();
+    const user = auth.currentUser;
+    const isNew = !projectData.id;
 
     const record = {
       ...blankProject(),
       ...projectData,
-      id,
       createdAt: projectData.createdAt || timestamp,
       updatedAt: timestamp,
+      updatedBy: (user && user.email) || null,
+      ...(isNew ? { createdBy: (user && user.email) || null } : {}),
     };
+    delete record.id; // id is the doc key, not a field
 
-    const idx = projects.findIndex((p) => p.id === id);
-    const isNew = idx < 0;
-    if (idx >= 0) {
-      projects[idx] = record;
-    } else {
-      projects.push(record);
-    }
+    const ref = projectData.id
+      ? db.collection(COLLECTION).doc(projectData.id)
+      : db.collection(COLLECTION).doc();
 
-    saveAll(projects);
-    return { record, isNew };
+    await ref.set(record, { merge: true });
+    return { record: { id: ref.id, ...record }, isNew };
   }
 
-  function remove(id) {
-    const projects = getAll().filter((p) => p.id !== id);
-    saveAll(projects);
+  async function remove(id) {
+    if (!id) return;
+    await db.collection(COLLECTION).doc(id).delete();
   }
 
-  return {
-    generateId,
-    getAll,
-    saveAll,
-    getById,
-    blankProject,
-    upsert,
-    remove,
-  };
+  // Live updates: fires callback immediately with the current list,
+  // then again every time any signed-in user adds/edits/deletes an
+  // artefact — this is what makes "everyone sees the same info" true
+  // in real time rather than only on page refresh.
+  // Returns an unsubscribe function.
+  function subscribe(callback) {
+    return db.collection(COLLECTION).onSnapshot(
+      (snap) => {
+        callback(snap.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
+      },
+      (err) => {
+        console.error("CareStorage.subscribe error:", err);
+      }
+    );
+  }
+
+  return { getAll, getById, blankProject, upsert, remove, subscribe };
 })();
