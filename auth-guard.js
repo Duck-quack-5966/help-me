@@ -2,7 +2,7 @@
    auth-guard.js
    ------------------------------------------------------------
    Protects dashboard/create/project pages using the Apps Script
-   session token managed by CareAuth.
+   session token managed by CareAuth. 
    ============================================================ */
 
 (function () {
